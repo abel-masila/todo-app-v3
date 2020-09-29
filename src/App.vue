@@ -8,10 +8,11 @@
     <button>New Todo</button>
   </form>
   <ul>
-    <li v-for="todo in todos" :key="todo.id" class="todo">
+    <li v-for="(todo, index) in todos" :key="todo.id" class="todo">
       <h3 @click="toggleDone(todo)" :class="{ done: todo.done }">
         {{ todo.content }}
       </h3>
+      <button @click="removeTodo(index)">Remove Todo</button>
     </li>
   </ul>
 </template>
@@ -34,11 +35,15 @@ export default {
     function toggleDone(todo) {
       todo.done = !todo.done;
     }
+    function removeTodo(index) {
+      todos.value.splice(index, 1);
+    }
     return {
       newTodo,
       todos,
       addNewTodo,
       toggleDone,
+      removeTodo,
     };
   },
 };
