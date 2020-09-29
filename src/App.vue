@@ -1,26 +1,59 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h3>Vue 3 todo app</h3>
+  <form @submit.prevent="addNewTodo">
+    <label>
+      New Todo
+    </label>
+    <input name="newTodo" v-model="newTodo" />
+    <button>New Todo</button>
+  </form>
+  <h3>{{ newTodo }}</h3>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { ref } from "vue";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  setup() {
+    const newTodo = ref("");
+    function addNewTodo() {
+      console.log("submitted form");
+    }
+    return {
+      newTodo,
+      addNewTodo,
+    };
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  font-family: sans-serif;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  font-size: 2em;
+  width: 80%;
+  margin: 0 auto;
+}
+input,
+textarea,
+button,
+p,
+div,
+section,
+article,
+select {
+  display: "block";
+  width: 100%;
+  font-family: sans-serif;
+  font-size: 1em;
+  margin: 0.5em;
+}
+.todo {
+  cursor: pointer;
+}
+.done {
+  text-decoration: line-through;
 }
 </style>
