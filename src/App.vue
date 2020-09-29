@@ -7,7 +7,11 @@
     <input name="newTodo" v-model="newTodo" />
     <button>New Todo</button>
   </form>
-  <h3>{{ newTodo }}</h3>
+  <ul>
+    <li v-for="(todo, index) in todos" :key="index">
+      <h3>{{ todo.content }}</h3>
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -16,11 +20,17 @@ export default {
   name: "App",
   setup() {
     const newTodo = ref("");
+    const todos = ref([]);
     function addNewTodo() {
-      console.log("submitted form");
+      todos.value.push({
+        done: false,
+        content: newTodo.value,
+      });
+      newTodo.value = "";
     }
     return {
       newTodo,
+      todos,
       addNewTodo,
     };
   },
