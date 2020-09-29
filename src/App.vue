@@ -8,7 +8,7 @@
     <button>New Todo</button>
   </form>
   <ul>
-    <li v-for="todo in todos" :key="todo.id">
+    <li v-for="todo in todos" :key="todo.id" class="todo">
       <h3 @click="toggleDone(todo)" :class="{ done: todo.done }">
         {{ todo.content }}
       </h3>
