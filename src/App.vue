@@ -8,8 +8,10 @@
     <button>New Todo</button>
   </form>
   <ul>
-    <li v-for="(todo, index) in todos" :key="index">
-      <h3>{{ todo.content }}</h3>
+    <li v-for="todo in todos" :key="todo.id">
+      <h3 @click="toggleDone(todo)" :class="{ done: todo.done }">
+        {{ todo.content }}
+      </h3>
     </li>
   </ul>
 </template>
@@ -23,15 +25,20 @@ export default {
     const todos = ref([]);
     function addNewTodo() {
       todos.value.push({
+        id: Date.now(),
         done: false,
         content: newTodo.value,
       });
       newTodo.value = "";
     }
+    function toggleDone(todo) {
+      todo.done = !todo.done;
+    }
     return {
       newTodo,
       todos,
       addNewTodo,
+      toggleDone,
     };
   },
 };
